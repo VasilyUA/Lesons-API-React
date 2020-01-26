@@ -29,7 +29,7 @@ class hamburgerMenuPage extends Component {
                   <MDBNavLink to="/reddit">RedditAPI</MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <MDBNavLink to="#!">Profile</MDBNavLink>
+                  <MDBNavLink to="/privat">PrivatbankAPI</MDBNavLink>
                 </MDBNavItem>
               </MDBNavbarNav>
             </MDBCollapse>

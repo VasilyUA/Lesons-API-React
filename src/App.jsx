@@ -9,6 +9,7 @@ import Footer from './Components/Layout/Footer'
 //Components
 import Home from './Components/Home/Home'
 import RedditAPI from './Components/RedditAPI/RedditAPI'
+import PrivatbankAPI from './Components/PrivatbankAPI/PrivatbankAPI'
 
 export class App extends Component {
   render() {
@@ -18,6 +19,7 @@ export class App extends Component {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/reddit' component={RedditAPI} />
+          <Route exact path='/privat' component={PrivatbankAPI} />
         </Switch>
         <Footer />
       </Rout>

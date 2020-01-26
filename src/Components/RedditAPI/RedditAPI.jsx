@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { MDBContainer, MDBRow, } from 'mdbreact';
 
+import './RedditAPI.css';
+
+//Loder
+import Spinner from '../Loder/Double Ring-1.9s-200px.svg'
+
 //Components 
 import Item from './Item'
 
@@ -59,31 +64,27 @@ export class RedditAPI extends Component {
 
 
     render() {
-        console.log(this.state.items)
         const { items, isLoading, enableAutoRefresh, minComments } = this.state;
         const itemsSortByComments = this.getitemsSortByComments(items, minComments);
         return (
             <main>
-                <MDBContainer style={{ marginTop: '10%', marginBottom: '10%' }}>
-                    <h1 style={{ textAlign: 'center' }}>Top Commented</h1>
-                    <button type='button' className="btn btn-success" onClick={this.updateAutoRefresh}>
-                        {enableAutoRefresh ? 'Stop' : 'Start'}AutoRefresh
+                {isLoading ? (
+                    <img src={Spinner} alt="loder" width="100%" />
+                ) :
+                    <MDBContainer style={{ marginTop: '10%', marginBottom: '10%' }}>
+                        <h1 style={{ textAlign: 'center' }}>Top Commented</h1>
+                        <button type='button' className="btn btn-success" onClick={this.updateAutoRefresh}>
+                            {enableAutoRefresh ? 'Stop' : 'Start'}AutoRefresh
                     </button>
-                    <br />
-                    <div>
-                        <p>Comments:{minComments}</p>
-                        <input type="range" onChange={this.updateMinComments} value={minComments} min={0} max={500} style={{ width: '400px' }} />
-                    </div>
-                    <MDBRow>
-                        {isLoading ? (<p>...Loading</p>) :
-                            itemsSortByComments.length > 0 ? (itemsSortByComments.map((item) => (
-                                <Item key={item.data.id} data={item.data} />
-                            ))) : (
-                                    <p>No results</p>
-                                )
-                        }
-                    </MDBRow>
-                </MDBContainer>
+                        <br />
+                        <div>
+                            <p>Comments:{minComments}</p>
+                            <input type="range" onChange={this.updateMinComments} value={minComments} min={0} max={500} style={{ width: '400px' }} />
+                        </div>
+                        <MDBRow>
+                            {itemsSortByComments.length > 0 ? (itemsSortByComments.map((item) => (<Item key={item.data.id} data={item.data} />))) : (<p>No results</p>)}
+                        </MDBRow>
+                    </MDBContainer>}
             </main>
         )
     }

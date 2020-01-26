@@ -1,0 +1,12 @@
+ul.bank{
+    margin: 0;
+    padding: 4px;
+}
+ul.bank li{
+    display: inline; /* Отображать как строчный элемент */
+    margin-right: 5px; /* Отступ слева */
+    padding: 3px; /* Поля вокруг текста */
+}
+.fig {
+    text-align: center; /* Выравнивание по центру */ 
+   }
