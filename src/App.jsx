@@ -10,6 +10,10 @@ import Footer from './Components/Layout/Footer'
 import Home from './Components/Home/Home'
 import RedditAPI from './Components/RedditAPI/RedditAPI'
 import PrivatbankAPI from './Components/PrivatbankAPI/PrivatbankAPI'
+import StarWars from './Components/StarWarsAPI/StarWars'
+import OnePageFilms from './Components/StarWarsAPI/Films/OnePageFilms'
+import StarNuws from './Components/StarNuwsAPI/StarNuws'
+import Weather from './Components/WeatherAPI/Weather'
 
 export class App extends Component {
   render() {
@@ -20,6 +24,10 @@ export class App extends Component {
           <Route exact path='/' component={Home} />
           <Route exact path='/reddit' component={RedditAPI} />
           <Route exact path='/privat' component={PrivatbankAPI} />
+          <Route exact path='/starwars' component={StarWars} />
+          <Route exact path='/starwars/films/:id' component={OnePageFilms} />
+          <Route exact path='/starnuws' component={StarNuws} />
+          <Route exact path='/weather' component={Weather} />
         </Switch>
         <Footer />
       </Rout>

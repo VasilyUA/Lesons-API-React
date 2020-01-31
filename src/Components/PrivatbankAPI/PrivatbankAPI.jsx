@@ -7,7 +7,7 @@ import Curs from './Curs'
 import './PrivatbankAPI.css'
 
 //Loder
-import Spinner from '../Loder/Double Ring-1.9s-200px.svg';
+import Spinner from '../Loder/Double Ring-1s-200px.svg';
 
 export class PrivatbankAPI extends Component {
     constructor() {
@@ -25,8 +25,8 @@ export class PrivatbankAPI extends Component {
         this.setState({
             isLoadingCurs: true
         })
-        let URL = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
-        fetch(URL)
+
+        fetch("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5")
             .then((response) => response.json())
             .then((response) => {
                 this.setState({
@@ -40,7 +40,8 @@ export class PrivatbankAPI extends Component {
         const { curs, isLoadingCurs } = this.state;
         return (
             <main>
-                {isLoadingCurs ? ( <p className="fig"><img src={Spinner} alt="loder" /></p>):(<div className="container">
+                {isLoadingCurs ? (<img src={Spinner} alt="loder" width="100%" height="650" />) : (
+                    <div className="container" style={{ marginTop: '5%' }}>
                         <h1 style={{ textAlign: 'center', fontSize: '3em' }}>Curs</h1>
                         <div className="row">
                             <div className='col-4 '>
@@ -53,7 +54,7 @@ export class PrivatbankAPI extends Component {
                             </div>
                         </div>
                     </div>)}
-                <div className="container-fluid">
+                {/* <div className="container-fluid">
                     <hr />
                     <div className="container" style={{ marginTop: '5%', marginBottom: '5%' }}>
                         <div className="row">
@@ -61,7 +62,7 @@ export class PrivatbankAPI extends Component {
                             <div className="offset-4 col-4"><h1>Термінали</h1></div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </main>
         )
     }

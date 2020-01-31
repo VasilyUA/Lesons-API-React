@@ -4,7 +4,7 @@ import { MDBContainer, MDBRow, } from 'mdbreact';
 import './RedditAPI.css';
 
 //Loder
-import Spinner from '../Loder/Double Ring-1.9s-200px.svg'
+import Spinner from '../Loder/Double Ring-1s-200px.svg'
 
 //Components 
 import Item from './Item'
@@ -60,16 +60,13 @@ export class RedditAPI extends Component {
     getitemsSortByComments = (items, minComments) => items
         .filter(item => item.data.num_comments >= minComments)
         .sort((a, b) => b.data.num_comments - a.data.num_comments);
-
-
-
     render() {
         const { items, isLoading, enableAutoRefresh, minComments } = this.state;
         const itemsSortByComments = this.getitemsSortByComments(items, minComments);
         return (
             <main>
                 {isLoading ? (
-                    <img src={Spinner} alt="loder" width="100%" />
+                    <img src={Spinner} alt="loder" width="100%" height="650" />
                 ) :
                     <MDBContainer style={{ marginTop: '10%', marginBottom: '10%' }}>
                         <h1 style={{ textAlign: 'center' }}>Top Commented</h1>

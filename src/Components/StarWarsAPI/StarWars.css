@@ -1,0 +1,15 @@
+.bgcard {
+  background-image: url("https://bipbap.ru/wp-content/uploads/2017/04/maxresdefault-2-6.jpg");
+  background-repeat: no-repeat;
+}
+.colorcard{
+    color: #fff;
+}
+.bagraundbody{
+    background-image: url("https://v-kosmose.com/wp-content/uploads/2017/05/star-space-wallpaper-2.jpg");
+    background-repeat: repeat;
+}
+.colornav{
+    color: #fff;
+    font-size: 2em;
+}

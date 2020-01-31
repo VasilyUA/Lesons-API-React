@@ -31,6 +31,15 @@ class hamburgerMenuPage extends Component {
                 <MDBNavItem>
                   <MDBNavLink to="/privat">PrivatbankAPI</MDBNavLink>
                 </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink to="/starwars">StarWars</MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink to="/starnuws">StarNuws</MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBNavLink to="/weather">Weather</MDBNavLink>
+                </MDBNavItem>
               </MDBNavbarNav>
             </MDBCollapse>
           </MDBContainer>
