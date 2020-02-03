@@ -11,6 +11,13 @@ import Cards from './Films/Cards'
 import PaginatPeople from './Piople/PaginatPeople'
 import Piople from './Piople/Piople'
 import Plenet from './Plenet/Plenet'
+import PaginationPlenet from './Plenet/PaginationPlenet'
+import Speciess from './Species/Species'
+import PaginationSpecies from './Species/PaginationSpecies'
+import Starships from './Starships/Starships'
+import PaginationStarships from './Starships/PaginationStarships'
+import Vehicles from './Vehicles/Vehicles'
+import PaginationVehicles from './Vehicles/PaginationVehicles'
 
 export class StarWars extends Component {
     constructor() {
@@ -22,6 +29,12 @@ export class StarWars extends Component {
             paginationPeople: '1',
             Plenets: [],
             paginationPlanets: '1',
+            Species: [],
+            paginationSpecies: '1',
+            Starship: [],
+            paginationStarship: '1',
+            Vehicle: [],
+            paginationVehicle: '1',
             //Lococ components
             activeItemJustified: "1",
             //Lococ components
@@ -32,7 +45,10 @@ export class StarWars extends Component {
     componentDidMount() {
         this.getStarWarsFilms();
         this.getStarWarsPiople();
-        // this.getStarWarsPlanets();
+        this.getStarWarsPlanets();
+        this.getStarWarsSpecies();
+        this.getStarWarsStarships();
+        this.getStarWarsVehicles();
     }
 
     UNSAFE_componentWillUpdate(prevProps, prevState) {
@@ -82,6 +98,48 @@ export class StarWars extends Component {
                 })
             })
     }
+    getStarWarsSpecies = () => {
+        this.setState({
+            isLoading: true
+        })
+        let { paginationSpecies } = this.state;
+        fetch(`https://swapi.co/api/species/?page=${paginationSpecies}`)//max(page=7)  пошук(&search=r2) 
+            .then((response) => response.json())
+            .then(({ results }) => {
+                this.setState({
+                    Species: results,
+                    isLoading: false
+                })
+            })
+    }
+    getStarWarsStarships = () => {
+        this.setState({
+            isLoading: true
+        })
+        let { paginationStarship } = this.state;
+        fetch(`https://swapi.co/api/starships/?page=${paginationStarship}`)//max(page=7)  пошук(&search=r2) 
+            .then((response) => response.json())
+            .then(({ results }) => {
+                this.setState({
+                    Starship: results,
+                    isLoading: false
+                })
+            })
+    }
+    getStarWarsVehicles = () => {
+        this.setState({
+            isLoading: true
+        })
+        let { paginationStarship } = this.state;
+        fetch(`https://swapi.co/api/vehicles/?page=${paginationStarship}`)//max(page=7)  пошук(&search=r2) 
+            .then((response) => response.json())
+            .then(({ results }) => {
+                this.setState({
+                    Vehicle: results,
+                    isLoading: false
+                })
+            })
+    }
 
     //Lococ components
     toggleJustified = tab => e => {
@@ -104,8 +162,7 @@ export class StarWars extends Component {
     }
 
     render() {
-        const { films, isLoading, People, Plenets } = this.state;
-        console.log(Plenets)
+        const { isLoading, films, People, Plenets, Species, Starship, Vehicle } = this.state;
         return (
             <main className='bagraundbody'>
                 {isLoading ? (<img src={Spinner} alt="loder" width="100%" height="650" />) : (
@@ -136,14 +193,23 @@ export class StarWars extends Component {
                                 </MDBNavItem>
                                 <MDBNavItem>
                                     <MDBNavLink className='colornav' to="#" active={this.state.activeItemJustified === "4"} onClick={this.toggleJustified("4")} role="tab" >
-                                        Test
+                                        Species
+                                    </MDBNavLink>
+                                </MDBNavItem>
+                                <MDBNavItem>
+                                    <MDBNavLink className='colornav' to="#" active={this.state.activeItemJustified === "5"} onClick={this.toggleJustified("5")} role="tab" >
+                                        Starships
+                                    </MDBNavLink>
+                                </MDBNavItem>
+                                <MDBNavItem>
+                                    <MDBNavLink className='colornav' to="#" active={this.state.activeItemJustified === "6"} onClick={this.toggleJustified("6")} role="tab" >
+                                        Vehicles
                                     </MDBNavLink>
                                 </MDBNavItem>
                             </MDBNav>
                             <MDBTabContent
                                 activeItem={this.state.activeItemJustified}
                             >
-
                                 <MDBTabPane tabId="1" role="tabpanel">
                                     {films.length ? (
                                         <Fragment>
@@ -155,6 +221,7 @@ export class StarWars extends Component {
                                     {films.length ? (
                                         <Fragment>
                                             <div className='container'>
+                                                <h1 className='colorcard' style={{ textAlign: "center" }}>StarWars Peoples</h1>
                                                 <PaginatPeople onHendelNambers={this.onHendelNambers} />
                                                 <Piople People={People} />
                                             </div>
@@ -163,24 +230,42 @@ export class StarWars extends Component {
                                 <MDBTabPane tabId="3" role="tabpanel">
                                     {Plenets.length ? (<Fragment>
                                         <div className="container">
-                                            <Plenet />
+                                            <h1 className='colorcard' style={{ textAlign: "center" }}>StarWars Plenets</h1>
+                                            <PaginationPlenet />
+                                            <Plenet Plenet={Plenets} />
                                         </div>
-                                    </Fragment>) : (null)}
-
+                                    </Fragment>)
+                                        : (null)}
                                 </MDBTabPane>
                                 <MDBTabPane tabId="4" role="tabpanel">
-                                    <p className="mt-2">
-                                        Etsy mixtape wayfarers, ethical wes anderson tofu before
-                                        they sold out mcsweeney's organic lomo retro fanny pack
-                                        lo-fi farm-to-table readymade. Messenger bag gentrify
-                                        pitchfork tattooed craft beer, iphone skateboard locavore
-                                        carles etsy salvia banksy hoodie helvetica. DIY synth PBR
-                                        banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
-                                        Williamsburg banh mi whatever gluten-free, carles pitchfork
-                                        biodiesel fixie etsy retro mlkshk vice blog. Scenester cred
-                                        you probably haven't heard of them, vinyl craft beer blog
-                                        stumptown. Pitchfork sustainable tofu synth chambray yr.
-                                    </p>
+                                    {Species.length ? (<Fragment>
+                                        <div className="container">
+                                            <h1 className='colorcard' style={{ textAlign: "center" }}>StarWars Species</h1>
+                                            <PaginationSpecies />
+                                            <Speciess Species={Species} />
+                                        </div>
+                                    </Fragment>)
+                                        : (null)}
+                                </MDBTabPane>
+                                <MDBTabPane tabId="5" role="tabpanel">
+                                    {Starship.length ? (<Fragment>
+                                        <div className="container">
+                                            <h1 className='colorcard' style={{ textAlign: "center" }}>StarWars Starship</h1>
+                                            <PaginationStarships />
+                                            <Starships Starship={Starship} />
+                                        </div>
+                                    </Fragment>)
+                                        : (null)}
+                                </MDBTabPane>
+                                <MDBTabPane tabId="6" role="tabpanel">
+                                    {Vehicle.length ? (<Fragment>
+                                        <div className="container">
+                                            <h1 className='colorcard' style={{ textAlign: "center" }}>StarWars Vehicle</h1>
+                                            <PaginationVehicles />
+                                            <Vehicles Vehicle={Vehicle} />
+                                        </div>
+                                    </Fragment>)
+                                        : (null)}
                                 </MDBTabPane>
                             </MDBTabContent>
                         </MDBContainer>
